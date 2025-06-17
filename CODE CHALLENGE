@@ -41,7 +41,7 @@ VALUES
 (1, 1, 'Robber 1', 'Armed and masked robber', 'Previous robbery convictions'), 
 (2, 2, 'Unknown', 'Investigation ongoing', NULL), 
 (3, 3, 'Suspect 1', 'Shoplifting suspect', 'Prior shoplifting arrests');
-
+-----------------------------------------------------------------------------------------
 ALTER TABLE Crime
 ALTER COLUMN Status VARCHAR(225) NOT NULL;
 
