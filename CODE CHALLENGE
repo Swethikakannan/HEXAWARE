@@ -50,6 +50,7 @@ SELECT * FROM Crime WHERE Status = 'OPEN'
 
 --2
 SELECT COUNT(*) AS TOTAL_INCIDENT FROM CRIME
+SELECT COUNT(INCIDENTTYPE AS TOTAL_INCIDENT FROM CRIME
 
 --3
 SELECT DISTINCT INCIDENTTYPE FROM CRIME
@@ -68,6 +69,7 @@ SELECT Name, Age FROM Suspect
 ORDER BY Age DESC
 
 --6
+
 SELECT AVG(Age) AS AvG_Age FROM (
     SELECT Age FROM Victim
     UNION ALL
@@ -113,19 +115,22 @@ HAVING COUNT(*) > 1
 --13
 SELECT DISTINCT c.CrimeID, c.IncidentType FROM Crime c
 JOIN Victim v ON c.CrimeID = v.CrimeID
-JOIN Suspect s ON c.CrimeID = s.CrimeID
-WHERE v.Name = s.Name
+JOIN Suspect s ON c.CrimeID = s.CrimeID WHERE v.Name = s.Name
 
 --14
-SELECT c.CrimeID, c.IncidentType, v.Name AS VictimName, s.Name AS SuspectName
-FROM Crime c
- JOIN Victim v ON c.CrimeID = v.CrimeID
- JOIN Suspect s ON c.CrimeID = s.CrimeID
+SELECT c.CrimeID,c.IncidentType,c.IncidentDate,c.Location,c.Description AS CrimeDescription,c.Status,
+    
+    v.VictimID,v.Name AS VictimName,v.ContactInfo,v.Injuries,
+    
+    s.SuspectID,s.Name AS SuspectName,s.Description AS SuspectDescription,s.CriminalHistory
+
+FROM Crime c JOIN Victim v ON c.CrimeID = v.CrimeID
+JOIN Suspect s ON c.CrimeID = s.CrimeID
+ORDER BY c.CrimeID
 
  --15
 SELECT DISTINCT s.CrimeID
-FROM Suspect s
-JOIN Victim v ON s.CrimeID = v.CrimeID
+FROM Suspect s JOIN Victim v ON s.CrimeID = v.CrimeID
 WHERE s.Age > ALL (
     SELECT v2.Age 
     FROM Victim v2 
@@ -133,10 +138,9 @@ WHERE s.Age > ALL (
 )
 
 --16
-SELECT Name, COUNT(*) AS IncidentCount
-FROM Suspect
+SELECT Name, COUNT(DISTINCT CRIMEID) AS IncidentCount FROM Suspect
 GROUP BY Name
-HAVING COUNT(*) > 1
+HAVING COUNT(DISTINCT CRIMEID) > 1
 
 --17
 SELECT C.CrimeID, C.IncidentType
@@ -145,14 +149,18 @@ FROM Crime c
 WHERE S.SuspectID IS NULL
 
 --18
-SELECT * FROM Crime
-WHERE CrimeID IN (
-    SELECT CrimeID FROM Crime
-    GROUP BY CrimeID
-    HAVING 
-        COUNT(CASE WHEN IncidentType = 'Homicide' THEN 1 END) >= 1
-        AND
-        COUNT(CASE WHEN IncidentType NOT IN ('Homicide', 'Robbery') THEN 1 END) = 0)
+SELECT * FROM Crime WHERE CrimeID IN (
+    SELECT c.CrimeID
+    FROM Crime c
+    WHERE c.IncidentType IN ('Homicide', 'Robbery')
+    AND EXISTS (
+        SELECT 1 FROM Crime c2 
+        WHERE c2.CrimeID = c.CrimeID AND c2.IncidentType = 'Homicide'
+    )
+    AND NOT EXISTS (
+        SELECT 1 FROM Crime c3 
+        WHERE c3.CrimeID = c.CrimeID AND c3.IncidentType NOT IN ('Homicide', 'Robbery'))
+    GROUP BY c.CrimeID)
 
 --19
 SELECT c.CrimeID,c.IncidentType,
@@ -162,7 +170,6 @@ ORDER BY c.CrimeID
 
 
 --20
-SELECT DISTINCT S.Name
-FROM Suspect S
+SELECT DISTINCT S.Name FROM Suspect S
 JOIN Crime C ON S.CrimeID = C.CrimeID
 WHERE C.IncidentType IN ('Robbery', 'Assault')
