@@ -1,0 +1,290 @@
+1. Display all the fibonacci series from 1 to 50.
+
+namespace ConsoleApp_Hexaware
+{
+     class fibonnaci
+    {
+        static void Main(string[] args)
+        {
+            int n = 50;
+            int n1 = 0, n2 = 1;
+            Console.WriteLine("Fibonacci series from 1 to 50:");
+            while(n1<= 50)
+            { 
+                int temp = n1 + n2;
+                n1 = n2;
+                n2 = temp;
+                Console.WriteLine(temp +" ");
+            }
+           
+        }
+    }
+}
+
+2. Accept a number and check whether it is prime or not.
+using System;
+
+
+namespace ConsoleApp_Hexaware
+{
+    internal class isprime
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Enter a number: ");
+            int num = int.Parse(Console.ReadLine());
+            bool isPrime = true;
+            if (num <= 1) isPrime = false;
+            else
+            {
+                for (int i = 2; i <= Math.Sqrt(num); i++)
+                {
+                    if (num % i == 0)
+                    {
+                        isPrime = false;
+                        break;
+                    }
+                }
+            }
+            Console.WriteLine(isPrime ? "Prime" : "Not Prime");
+
+        }
+
+
+    }
+}
+3.Display the prime numbers from 1 to 100.
+using System;
+
+
+namespace ConsoleApp_Hexaware
+{
+    class prime100
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Prime 100");
+            int n = 100;
+            for (int i = 2; i <= n; i++)
+            {
+                bool prime = true;
+                for (int j = 2; j <= Math.Sqrt(i); j++)
+                {
+                    if (i % j == 0)
+                    {
+                        prime = false;
+                        break;
+                    }
+                }
+                if (prime) Console.Write(i + " ");
+            }
+        }
+    }
+}
+4. accept a string and check whether it is palindrome or not. 
+using System;
+
+
+namespace ConsoleApp_Hexaware
+{
+    class palindrome
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter a string/number:");
+            string str = Console.ReadLine();
+            char[] arr = str.ToCharArray();
+            Array.Reverse(arr);
+            string rev = new string(arr);
+            Console.WriteLine(str == rev ? "palindrome" : "not palindrome");
+        }
+    }
+}
+
+namespace ConsoleApp_Hexaware
+{
+    internal class fact
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter a number:");
+            int n = int.Parse(Console.ReadLine());
+            int fact = 1;
+            for (int i = 2; i <= n; i++)
+            {
+                fact *= i;
+            }
+            Console.WriteLine("factorial:" + fact);
+        }
+
+
+    }
+}
+5. accept a number and print factorial. 
+
+using System;
+namespace ConsoleApp_Hexaware
+{
+    internal class fact
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter a number:");
+            int n = int.Parse(Console.ReadLine());
+            int fact = 1;
+            for (int i = 2; i <= n; i++)
+            {
+                fact *= i;
+            }
+            Console.WriteLine("factorial:" + fact);
+        }
+
+
+    }
+}
+6. accept 3x3 matrix and display matrix addition
+using System;
+
+
+namespace ConsoleApp_Hexaware
+{
+    internal class matrixadd
+    {
+        static void Main(string[] args)
+        {
+            int[,] a = new int[3, 3];
+            int[,] b = new int[3, 3];
+            int[,] sum = new int[3, 3];
+            Console.WriteLine("Enter 1st 3x3 matrix:");
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                    a[i, j] = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter 2nd 3x3 matrix:");
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                    b[i, j] = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Matrix Addition:");
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    sum[i, j] = a[i, j] + b[i, j];
+                    Console.Write(sum[i, j] + "\t");
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
+7. accept 3x3 matrix and display matrix multiplication.
+using System;
+
+
+namespace ConsoleApp_Hexaware
+{
+    internal class matrixadd
+    {
+        static void Main(string[] args)
+        {
+            int[,] a = new int[3, 3];
+            int[,] b = new int[3, 3];
+            int[,] sum = new int[3, 3];
+            Console.WriteLine("Enter 1st 3x3 matrix:");
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                    a[i, j] = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter 2nd 3x3 matrix:");
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                    b[i, j] = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Matrix Addition:");
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    sum[i, j] = a[i, j] + b[i, j];
+                    Console.Write(sum[i, j] + "\t");
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
+8. within 3x3 matrix display all the numbers sum.
+
+
+namespace ConsoleApp_Hexaware
+{
+    internal class fact
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter a number:");
+            int n = int.Parse(Console.ReadLine());
+            int fact = 1;
+            for (int i = 2; i <= n; i++)
+            {
+                fact *= i;
+            }
+            Console.WriteLine("factorial:" + fact);
+        }
+
+
+    }
+}
+9. within 3x3 matrix display all the even and odd numbers sum.
+using System;
+
+
+namespace ConsoleApp_Hexaware
+{
+    internal class evenoddmatrix
+    {
+        static void Main(string[] args)
+        {
+            int[,] mat = new int[3, 3];
+            int even = 0, odd = 0;
+            Console.WriteLine("Enter 3x3 matrix:");
+            for (int i = 0; i < 3; i++)
+                for (int j = 0; j < 3; j++)
+                {
+                    mat[i, j] = int.Parse(Console.ReadLine());
+                    if (mat[i, j] % 2 == 0)
+                        even += mat[i, j];
+                    else
+                        odd += mat[i, j];
+                }
+            Console.WriteLine("Even Sum: " + even);
+            Console.WriteLine("Odd Sum: " + odd);
+
+        }
+    }
+}
+
+10. within 3x3 matrix display principal diagonal elements sum.
+
+
+
+namespace ConsoleApp_Hexaware
+{
+    internal class fact
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter a number:");
+            int n = int.Parse(Console.ReadLine());
+            int fact = 1;
+            for (int i = 2; i <= n; i++)
+            {
+                fact *= i;
+            }
+            Console.WriteLine("factorial:" + fact);
+        }
+
+
+    }
+}
